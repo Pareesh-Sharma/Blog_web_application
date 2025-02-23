@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Blog App</h1>
+    
+    <section class="create-post">
+      <h2>Create a New Post</h2>
+      <form action="/posts" method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="content" placeholder="Content" required></textarea>
+        <button type="submit">Create Post</button>
+      </form>
+    </section>
+    
+    <section class="posts">
+      <h2>Posts</h2>
+      <% if (posts.length === 0) { %>
+        <p>No posts yet!</p>
+      <% } else { %>
+        <ul>
+          <% posts.forEach(post => { %>
+            <li class="post-item">
+              <h3><%= post.title %></h3>
+              <p><%= post.content %></p>
+              <a href="/posts/<%= post.id %>/edit" class="btn">Edit</a>
+              <form action="/posts/<%= post.id %>/delete" method="POST" class="delete-form">
+                <button type="submit" class="btn delete">Delete</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </section>
+  </div>
+</body>
+</html>
